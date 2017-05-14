@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <input type="text" id="uname" placeholder="User Name" />
+        <br /><br />
+        <input type="password" id="password" placeholder="Password" /> 
+        <br /><br />
+        <input type="button" value="Login Ajax" onclick="Click()"/>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    function Click()
+    {
+        //alert("Basıldı");
+
+        var uname = document.getElementById("uname").value;
+        var pass = document.getElementById("password").value;
+
+        var user = JSON.stringify({
+            'name': uname,
+            'pass' : pass
+        })
+
+        $.ajax({
+            type: "POST",
+            url: '/Home/Index',
+            data: user,
+            contentType: 'application/json',
+            success: function (response) {
+                alert(response.mesaj);
+            },
+            error: function (response) {
+                alert(response.mesaj);
+            }
+        })
+    }
+</script>
